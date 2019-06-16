@@ -4,12 +4,19 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
 	</script>
 
+    <!-- bootstrap -->
     <script src="js/bootstrap.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <!-- my own javascript file -->
+    <script src="plot_data.js"></script>
 </head>
 
 <body>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="page-header">
 			<h1>Toggle a picture <br><small>Animal photos</small></h1>
 		</div>
@@ -22,28 +29,19 @@
 
 		<br>
 		<div class="row">
-			<div class="col-xs-6 col-md-3 col-lg-2">
-			<span class="border border-primary">
-				<picture>
-					<img  class="photo_list" id="myPicture">
-				</picture>
-			</span>
+			<div class="col-xs-12 col-md-6 col-lg-6">
+				<img  class="photo_list" id="myPicture">
+				<canvas id="myChart"></canvas>
 			</div>
+
 		</div>
 	</div>
 
-	<script>
-		var N = 3;
-		str = "";
-		for (var i = 0; i < N; i++) {
-			console.log("hej " + i)
-		}
-	</script>
 
 	<script>
 		$(document).ready(function(){
 			$("#myPicture").attr('src', 'horse.jpeg')
-			console.log("this is the true caste")
+			console.log("document ready")
 		});
 
 		$("#myButton").click(function(){
@@ -53,5 +51,7 @@
 				$("#myPicture").attr('src', 'horse.jpeg')
 			}
 		});
+
+		plotData();
 	</script>
 </body>
