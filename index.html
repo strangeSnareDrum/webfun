@@ -1,17 +1,38 @@
 <head>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
+
 <body>
-	Lite texte
+	Intro text
+
 	<br>
 	<picture>
-		<img src="en_kanin.jpeg">
+		<img id="myPicture">
 	</picture>
-	<script type="text/javascript">
+
+	<br>
+	<button id="myButton" type="button">Toggle picture</button>
+
+	<script>
+		var N = 3;
 		str = "";
-		for (var i = 0; i < 10; i++) {
+		for (var i = 0; i < N; i++) {
 			console.log("hej " + i)
 		}
 	</script>
-</body>
 
+	<script>
+		$(document).ready(function(){
+			$("#myPicture").attr('src', 'horse.jpeg')
+			console.log("this is the true caste")
+		});
+
+		$("#myButton").click(function(){
+			if ($("#myPicture").attr('src') == 'horse.jpeg') {
+				$("#myPicture").attr('src', 'rabbit.jpeg')
+			} else {			
+				$("#myPicture").attr('src', 'horse.jpeg')
+			}
+		}); 	
+	</script>
+</body>
