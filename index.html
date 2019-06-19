@@ -30,7 +30,7 @@
 		<br>
 		<div class="row">
 			<div class="col-xs-12 col-md-6 col-lg-6">
-				<img  class="photo_list" id="myPicture">
+				<img  class="photo_list" id="myPicture" height="200px">
 				<canvas id="myChart"></canvas>
 			</div>
 
@@ -40,27 +40,37 @@
 
 	<script>
 		$(document).ready(function(){
+            // picture
 			$("#myPicture").attr('src', 'horse.jpeg')
-			console.log("document ready")
 
-            // Create a request variable and assign a new XMLHttpRequest object to it.
-            var request = new XMLHttpRequest();
+            // data from some api
+            $.support.cors = true; // Enable Cross domain requests
+            var url = "https://ghibliapi.herokuapp.com/films";
+            var title = "Porco Rosso"
+            var queryString = "title=" + title;
+            
+            $.ajax(
+                url,
+                {
+                    method: "GET",
+                    dataType: "json",
+                    data: queryString,
 
-            // Open a new connection, using the GET request on the URL endpoint
-            request.open('GET', 'https://ghibliapi.herokuapp.com/films', true);
+                    success: function(data) {
+                        if (data == null) return;
+                        try {
+                            console.log("Producer of " + title + " is "+ data[0].producer)
+                        }
+                        catch (e)
+                        {
+                            // handle
+                        }
+                    }
+                }
+            )
 
-            request.onload = function () {
-                // Begin accessing JSON data here
-                var data = JSON.parse(this.response);
-
-                data.forEach(movie => {
-                // Log each movie's title
-                console.log(movie.title);
-                });
-            }
-
-            // Send request
-            request.send();
+            // plot local data
+            plotData();
 		});
 
 		$("#myButton").click(function(){
@@ -70,7 +80,5 @@
 				$("#myPicture").attr('src', 'horse.jpeg')
 			}
 		});
-
-		plotData();
 	</script>
 </body>
